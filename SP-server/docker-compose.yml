@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mongo:
+    container_name: sp_mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    networks: 
+      - server
+    volumes:
+      - "./data:/data/db"
+  server:
+    container_name: sp_server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    links:
+        - mongo
+    ports:
+      - "8081:8081"
+      - "9222:9222"
+    restart: always
+    volumes:
+      - ".:/app"
+    networks: 
+      - server
+networks: 
+  server:

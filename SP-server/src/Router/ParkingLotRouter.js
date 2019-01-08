@@ -16,7 +16,7 @@ const ParkingLotRouter = () => {
     })
 
     /**
-     * Get every Parking Lot from DB
+     * Get one Parking Lot from DB by it's name
      */
     router.get('/parking-lot/:name', (req,res) => {
         ParkingLot.findOne({name: req.params.name})
